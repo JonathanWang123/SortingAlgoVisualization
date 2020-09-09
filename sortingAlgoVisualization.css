@@ -1,0 +1,136 @@
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.containerWider {
+  width: 100%;
+  max-width:80%;
+  height: 98vh;
+      margin-right: 5vw;
+      margin-left: 5vw; 
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+  .containerWider{
+      margin-right: 5vw;
+      margin-left: 5vw;          
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+  .containerWider{
+      margin-right: 5vw;
+      margin-left: 5vw;          
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+  .containerWider{
+      margin-right: auto;
+      margin-left: auto;        
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  .containerWider{
+      margin-right: auto;
+      margin-left: auto;
+  }
+}
+
+
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+
+.col {
+
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+.col {
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+.btn {
+  border: 1px solid rgba(126, 126, 126, 0.55);
+  background-color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  color:black;
+}
+.btn:hover {
+    background: #eee;
+}
+.mainBody {
+  border: 1px solid black;
+  height: 70vh;
+}
+
+body {
+ font-family: "Verdana", Geneva, sans-serif;
+}
+.arrayElement{
+    position:relative;
+    width: 100%;
+    padding-left:0.5%;
+    padding-right:0.5%;
+    max-width: 4%;
+    height:3.5vh;
+    top:66.5vh;
+}
+.bar{
+    position:relative;
+    background-color:black;
+    width:100%;
+    height:100%;
+    transform-origin: bottom center;
+}
