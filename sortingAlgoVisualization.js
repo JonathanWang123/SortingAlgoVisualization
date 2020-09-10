@@ -4,95 +4,47 @@ for(var i = 0; i < 20; i++){
     var boxID = "b" + (i+1);
     document.getElementById(boxID).style.transform = "scale(1," + a[i] + ")";
 }
-document.getElementById('Bubble').onclick = function() {
-   a = shuffle(a);
-   bubbleSort(a);
-};
-document.getElementById('Insertion').onclick = function() {
-        swap("p2","p3");
-  // a = shuffle(a);
-   //console.log(a.toString());
-   //insertionSort(a);
-   //console.log(a.toString());
-};
-document.getElementById('Selection').onclick = function() {
-    swap("p3","p4");
-//   a = shuffle(a);
-//   console.log(a.toString());
-//   selectionSort(a);
-//   console.log(a.toString());
-};
-document.getElementById('Merge').onclick = function() {
-    swap("p4","p5");
-//   a = shuffle(a);
-//   console.log(a.toString());
-//   mergeSort(a,0,a.length-1);
-//   console.log(a.toString());
-};
-document.getElementById('Quick').onclick = function() {
-    swap("p5","p6");
-//   a = shuffle(a);
-//   console.log(a.toString());
-//   quickSort(a,0,a.length-1);
-//   console.log(a.toString());
-};
-document.getElementById('Heap').onclick = function() {
-    swap("p6","p7");
-//   a = shuffle(a);
-//   console.log(a.toString());
-//   heapSort(a);
-//   console.log(a.toString());
-};
+    document.getElementById('Bubble').onclick = function() {
+       a = shuffle(a);
+       bubbleSort(a);
+    };
+    document.getElementById('Insertion').onclick = function() {
+       a = shuffle(a);
+       insertionSort(a);
+    };
+    document.getElementById('Selection').onclick = function() {
 
-function swap(id1,id2) {
-    var box1 = document.getElementById("p" + id1.substr(1));
-    var box2 = document.getElementById("p" + id2.substr(1));
-    var bar1 = document.getElementById("b" + id1.substr(1));
-    var bar2 = document.getElementById("b" + id2.substr(1));
-    
-    var boxOffset1 = box1.offsetLeft;
-    var boxOffset2 = box2.offsetLeft;
-    var boxLeft1 = parseInt(box1.style.left);
-    if(isNaN(boxLeft1)) boxLeft1 = 0;
-    var boxLeft2 = parseInt(box2.style.left);
-    if(isNaN(boxLeft2)) boxLeft2 = 0;
-    var boxHeight1 = parseInt(bar1.style.transform.substr(bar1.style.transform.indexOf(",")+1));
-    var boxHeight2 = parseInt(bar2.style.transform.substr(bar2.style.transform.indexOf(",")+1));
-    if(boxOffset2 > boxOffset1){
-          var pos = 0;
-          var id = requestAnimationFrame(frame);
-          function frame() {
-            if (pos >= boxOffset2 - boxOffset1) {
-              bar1.style.transform = "scale(1," + boxHeight2 + ")";
-              bar2.style.transform = "scale(1," + boxHeight1 + ")";
-              box1.style.left = boxLeft1 + 'px';
-              box2.style.left = boxLeft2 + 'px';
-              cancelAnimationFrame(id);
-            } else {
-              pos+=10;
-              box1.style.left = boxLeft1 + pos + 'px';
-              box2.style.left = boxLeft2 - pos + 'px';
-              requestAnimationFrame(frame);
-            }
-          }
-    } else if (boxOffset2 < boxOffset1){
-          var pos = 0;
-          var id = setInterval(frame, 1);
-          function frame() {
-            if (pos >= boxOffset1 - boxOffset2) {
-              bar1.style.transform = "scale(1," + boxHeight2 + ")";
-              bar2.style.transform = "scale(1," + boxHeight1 + ")";
-              box1.style.left = boxLeft1 + 'px';
-              box2.style.left = boxLeft2 + 'px';
-              cancelAnimationFrame(id);
-            } else {
-              pos+=10;
-              box1.style.left = boxLeft1 - pos + 'px';
-              box2.style.left = boxLeft2 + pos + 'px';
-              requestAnimationFrame(frame);
-            }
-          }
-    }
+       a = shuffle(a);
+       selectionSort(a);
+    };
+    document.getElementById('Merge').onclick = function() {
+       a = shuffle(a);
+       mergeSort(a,0,a.length-1);
+    };
+    document.getElementById('Quick').onclick = function() {
+       a = shuffle(a);
+       quickSort(a,0,a.length-1);
+    };
+    document.getElementById('Heap').onclick = function() {
+       a = shuffle(a);
+       heapSort(a);
+    };
+
+function disableButtons(){
+    document.getElementById('Bubble').disabled = true;
+    document.getElementById('Insertion').disabled = true;
+    document.getElementById('Selection').disabled = true;
+    document.getElementById('Merge').disabled = true;
+    document.getElementById('Quick').disabled = true;
+    document.getElementById('Heap').disabled = true;
+}
+function enableButtons(){
+    document.getElementById('Bubble').disabled = false;
+    document.getElementById('Insertion').disabled = false;
+    document.getElementById('Selection').disabled = false;
+    document.getElementById('Merge').disabled = false;
+    document.getElementById('Quick').disabled = false;
+    document.getElementById('Heap').disabled = false;
 }
 function shuffle(array) {
   var tmp, current, top = array.length;
@@ -109,72 +61,172 @@ function shuffle(array) {
     }
   return array;
 }
-function printArray(array){
-    for(var i = 0; i < array.length; i++){
-        var id = "b" + (i+1);
-        document.getElementById(id).style.transform = "scale(1," + a[i] + ")";
+async function swap(id1,id2,timer, rate) {
+    if(id1 === id2){
+        return;
+    }
+    var box1 = document.getElementById("p" + id1.substr(1));
+    var box2 = document.getElementById("p" + id2.substr(1));
+    var bar1 = document.getElementById("b" + id1.substr(1));
+    var bar2 = document.getElementById("b" + id2.substr(1));
+    
+    var boxOffset1 = box1.offsetLeft;
+    var boxOffset2 = box2.offsetLeft;
+    var boxLeft1 = parseInt(box1.style.left);
+    if(isNaN(boxLeft1)) boxLeft1 = 0;
+    var boxLeft2 = parseInt(box2.style.left);
+    if(isNaN(boxLeft2)) boxLeft2 = 0;
+    
+    var boxHeight1 = parseInt(bar1.style.transform.substr(bar1.style.transform.indexOf(",")+1));
+    var boxHeight2 = parseInt(bar2.style.transform.substr(bar2.style.transform.indexOf(",")+1));
+    
+    if(boxOffset2 > boxOffset1){
+          var pos = 0;
+          while(pos < boxOffset2 - boxOffset1){
+              pos+=rate;
+              box1.style.left = boxLeft1 + pos + 'px';
+              box2.style.left = boxLeft2 - pos + 'px';
+              await delay(timer);
+          }
+              bar1.style.transform = "scale(1," + boxHeight2 + ")";
+              bar2.style.transform = "scale(1," + boxHeight1 + ")";
+              box1.style.left = boxLeft1 + 'px';
+              box2.style.left = boxLeft2 + 'px';
+    } else if (boxOffset2 < boxOffset1){
+          var pos = 0;
+          while(pos < boxOffset1 - boxOffset2){
+              pos+=rate;
+              box1.style.left = boxLeft1 - pos + 'px';
+              box2.style.left = boxLeft2 + pos + 'px';
+              await delay(timer);
+          }
+              bar1.style.transform = "scale(1," + boxHeight2 + ")";
+              bar2.style.transform = "scale(1," + boxHeight1 + ")";
+              box1.style.left = boxLeft1 + 'px';
+              box2.style.left = boxLeft2 + 'px';
     }
 }
+function requestTimeout(fn, delay) {
+			
+	var start = new Date().getTime(),
+		handle = new Object();
+		
+	function loop(){
+		var current = new Date().getTime(),
+			delta = current - start;
+			
+		delta >= delay ? fn.call() : handle.value = requestAnimationFrame(loop);
+	};
+	
+	handle.value = requestAnimationFrame(loop);
+	return handle;
+};
 function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => requestTimeout(resolve, ms));
 }
 async function bubbleSort(array){
+    disableButtons();
     var length = array.length;
     for (var i = 0; i < length; i++) { 
         for (var j = 0; j < (length - i - 1); j++) {
             var bar1 = document.getElementById("b" + (j+1));
             var bar2 = document.getElementById("b" + (j+2));
-            bar1.style.backgroundColor = "red";
-            bar2.style.backgroundColor = "red";
+            bar1.style.backgroundColor = "grey";
+            bar2.style.backgroundColor = "grey";
+            await delay(100);
             if(array[j] > array[j+1]) {
+                bar1.style.backgroundColor = "red";
+                bar2.style.backgroundColor = "red";
+                await delay(200);
                 var tmp = array[j];  
                 array[j] = array[j+1]; 
                 array[j+1] = tmp;
-                swap("p" + (j+1), "p" + (j+2))
+                swap("p" + (j+1), "p" + (j+2), 10, 10);
 
-                await delay(300);
+                await delay(window.innerWidth/6.4);
             }
             bar1.style.backgroundColor = "black";
             bar2.style.backgroundColor = "black";
-
+            
         } 
-        document.getElementById("b" + (length - i)).style.backgroundColor = "blue";
+        document.getElementById("b" + (length - i)).style.backgroundColor = "black";
     }
+    enableButtons();
 }
-function insertionSort(array){
+async function insertionSort(array){
+    disableButtons();
     for(var i = 1; i < array.length; i++){
+        var barPrev = document.getElementById("b" + (i));
+        var barCurr = document.getElementById("b" + (i+1));
+        barPrev.style.backgroundColor = "grey";
+        barCurr.style.backgroundColor = "grey";
+        await delay(300);
+        
         var curr = array[i];
         var prev = i - 1;
         
         while(prev >= 0 && array[prev] > curr){
             array[prev+1] = array[prev];
+            swap("p" + (prev+1), "p" + (prev+2), 10, 10);
+            document.getElementById("b" + (prev+1)).style.backgroundColor = "red";
+            document.getElementById("b" + (prev+2)).style.backgroundColor = "red";
+            await delay(window.innerWidth/6.5);
+            document.getElementById("b" + (prev+1)).style.backgroundColor = "#505050";
+            document.getElementById("b" + (prev+2)).style.backgroundColor = "#505050";
             prev = prev-1;
         }
+        for(var k = 1; k < array.length; k++){
+            document.getElementById("b" + (k)).style.backgroundColor = "black";
+        }
         array[prev+1] = curr;
+        
+        barPrev.style.backgroundColor = "black";
+        barCurr.style.backgroundColor = "black";
     }
+    enableButtons();
 }
-function selectionSort(array){
+async function selectionSort(array){
+        disableButtons();
         for (var i = 0; i < array.length-1; i++) 
         { 
             var min = i; 
+            var minBar = document.getElementById("b" + (i+2));
+            minBar.style.backgroundColor = "cyan";
+            var iBar = document.getElementById("b" + (i+1));
+            iBar.style.backgroundColor = "cyan";
+            
             for (var j = i+1; j < array.length; j++){
+                    var activeBar = document.getElementById("b" + (j+1));
+                    activeBar.style.backgroundColor = "grey";
+                    await delay(100);
+                    activeBar.style.backgroundColor = "black";
+                
+                
                 if (array[j] < array[min]) {
+                    minBar.style.backgroundColor = "black";
                     min = j; 
+                    minBar = document.getElementById("b" + (min+1));
+                    minBar.style.backgroundColor = "cyan";
+                    await delay(200);
                 }
             }
+            var bar = document.getElementById("b" + (min+1));
+            iBar.style.backgroundColor = "red";
+            bar.style.backgroundColor = "red";
             var temp = array[min]; 
             array[min] = array[i]; 
             array[i] = temp; 
+            swap("p" + (min+1), "p" + (i+1), 5,30);
+            await delay(window.innerWidth/2.4);
+            iBar.style.backgroundColor = "black";
+            bar.style.backgroundColor = "black";
         } 
-    window.setTimeout(function printArr(){    
-    for(var i = 0; i < array.length; i++){
-        var id = "b" + (i+1);
-        document.getElementById(id).style.backgroundColor  = "red";
-        document.getElementById(id).style.transform = "scale(1," + a[i] + ")";
-    }},3000);
+        document.getElementById("b" + (array.length)).backgroundColor = "black";
+        enableButtons();
 }
 function mergeSort(array,l,r) 
 {
+    disableButtons();
         if (l < r) { 
             // Find the middle point 
             var m = Math.floor((l + r) / 2); 
@@ -186,6 +238,7 @@ function mergeSort(array,l,r)
             // Merge the sorted halves 
             merge(array, l, m, r); 
         } 
+    enableButtons();
 }
 function merge(array,l,m,r){
         var n1 = m - l + 1; 
@@ -229,6 +282,7 @@ function merge(array,l,m,r){
         } 
 }
 function quickSort(array,low,high){
+    disableButtons();
        if (low < high) 
         { 
             var pi = partition(array, low, high); 
@@ -236,6 +290,7 @@ function quickSort(array,low,high){
             quickSort(array, low, pi-1); 
             quickSort(array, pi+1, high); 
         } 
+    enableButtons();
 }
 function partition(array,low,high){
         var pivot = array[high];  
@@ -262,6 +317,7 @@ function partition(array,low,high){
         return i+1; 
 }
 function heapSort(array){
+    disableButtons();
         var n = array.length; 
   
         // Build heap (rearrange array) 
@@ -279,6 +335,7 @@ function heapSort(array){
             // call max heapify on the reduced heap 
             heapify(array, i, 0); 
         } 
+    enableButtons();
 }
 function heapify(array,n,i){
         var largest = i; // Initialize largest as root 
