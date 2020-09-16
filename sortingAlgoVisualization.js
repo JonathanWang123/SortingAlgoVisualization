@@ -4,47 +4,47 @@ for(var i = 0; i < 20; i++){
     var boxID = "b" + (i+1);
     document.getElementById(boxID).style.transform = "scale(1," + a[i] + ")";
 }
-    document.getElementById('Bubble').onclick = function() {
-       a = shuffle(a);
-       bubbleSort(a);
+    document.getElementById('Play').onclick = function() {
+        switch(document.getElementById('AlgorithmSelect').value) {
+          case "Bubble":
+            bubbleSort(a);   
+            break;         
+          case "Insertion":
+            insertionSort(a);   
+            break;          
+          case "Selection":
+            selectionSort(a);   
+            break;          
+          case "Merge":
+            mergeSort(a,0,a.length-1); 
+            break;          
+          case "Quick":
+            quickSort(a,0,a.length-1);
+            break;
+          case "Heap":
+            heapSort(a);
+            break;
+          default:
+            break;
+        }
     };
-    document.getElementById('Insertion').onclick = function() {
+    document.getElementById('Shuffle').onclick = function() {
        a = shuffle(a);
-       insertionSort(a);
-    };
-    document.getElementById('Selection').onclick = function() {
-
-       a = shuffle(a);
-       selectionSort(a);
-    };
-    document.getElementById('Merge').onclick = function() {
-       a = shuffle(a);
-       mergeSort(a,0,a.length-1);
-    };
-    document.getElementById('Quick').onclick = function() {
-       a = shuffle(a);
-       quickSort(a,0,a.length-1);
-    };
-    document.getElementById('Heap').onclick = function() {
-       a = shuffle(a);
-       heapSort(a);
+    };    
+    document.getElementById('Reverse').onclick = function() {
+       a = reverse(a);
+    };    
+    document.getElementById('Sorted').onclick = function() {
+       a = sort(a);
     };
 
 function disableButtons(){
-    document.getElementById('Bubble').disabled = true;
-    document.getElementById('Insertion').disabled = true;
-    document.getElementById('Selection').disabled = true;
-    document.getElementById('Merge').disabled = true;
-    document.getElementById('Quick').disabled = true;
-    document.getElementById('Heap').disabled = true;
+    document.getElementById('Shuffle').disabled = true;
+    document.getElementById('Play').disabled = true;
 }
 function enableButtons(){
-    document.getElementById('Bubble').disabled = false;
-    document.getElementById('Insertion').disabled = false;
-    document.getElementById('Selection').disabled = false;
-    document.getElementById('Merge').disabled = false;
-    document.getElementById('Quick').disabled = false;
-    document.getElementById('Heap').disabled = false;
+    document.getElementById('Shuffle').disabled = false;
+    document.getElementById('Play').disabled = false;
 }
 function shuffle(array) {
   var tmp, current, top = array.length;
@@ -60,6 +60,26 @@ function shuffle(array) {
         document.getElementById(id).style.transform = "scale(1," + a[i] + ")";
     }
   return array;
+}
+function sort(array) {
+    var a = [];
+    for(var i = 0; i < 20; i++){
+        a[i] = i+1;
+        var boxID = "b" + (i+1);
+        document.getElementById(boxID).style.transform = "scale(1," + a[i] + ")";
+    }
+    array = a;
+    return array;
+}
+function reverse(array) {
+    var a = [];
+    for(var i = 0; i < 20; i++){
+        a[i] = 20-i;
+        var boxID = "b" + (i+1);
+        document.getElementById(boxID).style.transform = "scale(1," + a[i] + ")";
+    }
+    array = a;
+    return array;
 }
 async function swap(id1,id2,timer, rate) {
     if(id1 === id2){
@@ -141,9 +161,9 @@ async function bubbleSort(array){
                 var tmp = array[j];  
                 array[j] = array[j+1]; 
                 array[j+1] = tmp;
-                swap("p" + (j+1), "p" + (j+2), 10, 10);
+                swap("p" + (j+1), "p" + (j+2), 10, 15);
 
-                await delay(window.innerWidth/6.4);
+                await delay(window.innerWidth/10);
             }
             bar1.style.backgroundColor = "black";
             bar2.style.backgroundColor = "black";

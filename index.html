@@ -8,14 +8,8 @@
         <div class="containerWider">
             <div class="row">
                 <div class="col" style="text-align:center; font-size:20px"><h1>Sorting Algorithm Visualization</h1></div>
-                <div class="col" style="text-align: center">
-                    <button id="Bubble" class="btn">Bubble Sort</button>
-                    <button id="Insertion" class="btn">Insertion Sort</button>
-                    <button id="Selection" class="btn">Selection Sort</button>
-                    <button id="Merge" class="btn">Merge Sort</button>
-                    <button id="Quick" class="btn">Quick Sort</button>
-                    <button id="Heap" class="btn">Heap Sort</button>
-                </div>
+            </div>
+            <div class="row">
                 <div class="col mainBody" style="">
                     <div id="array" class="row" style="">
                         <div class="arrayElement" id="p1"><div id="b1" class="bar"></div></div>
@@ -39,6 +33,24 @@
                         <div class="arrayElement" id="p19" ><div id="b19" class="bar"></div></div>
                         <div class="arrayElement" id="p20"><div id="b20" class="bar"></div></div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col controlPanel" style="text-align: center">
+                    <button id="Shuffle" class="btn">Random</button>
+                    <button id="Reverse" class="btn">Reverse</button>
+                    <button id="Sorted" class="btn">Sorted</button>
+                    <select id="AlgorithmSelect" class="custom-select">
+                        <option value="Bubble">Bubble Sort</option>
+                        <option value="Insertion">Insertion Sort</option>
+                        <option value="Selection">Selection Sort</option>
+                        <option value="Merge">Merge Sort</option>
+                        <option value="Quick">Quick Sort</option>
+                        <option value="Heap">Heap Sort</option>
+                    </select>
+
+                    <button id="Play" class="btn">Play</button>
+
                 </div>
             </div>
         </div>
