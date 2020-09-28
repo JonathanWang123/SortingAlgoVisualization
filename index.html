@@ -4,10 +4,10 @@
         <title>Sorting Algorithm Visualization</title>
         <link href="sortingAlgoVisualization.css" rel="stylesheet">
     </head>
-    <body style="background-color:white">
+    <body style="background-color:#5CDB95; color: rgb(255, 253, 240)">
         <div class="containerWider">
             <div class="row">
-                <div class="col" style="text-align:center; font-size:20px"><h1>Sorting Algorithm Visualization</h1></div>
+                <div class="col genevaFont" style="text-align:center; font-size:20px"><h1>Sorting Algorithm Visualization</h1></div>
             </div>
             <div class="row">
                 <div class="col mainBody" style="">
@@ -97,21 +97,69 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col controlPanel" style="text-align: center">
-                    <button id="Shuffle" class="btn">Random</button>
-                    <button id="Reverse" class="btn">Reverse</button>
-                    <button id="Sorted" class="btn">Sorted</button>
-                    <select id="AlgorithmSelect" class="custom-select">
-                        <option value="Bubble">Bubble Sort</option>
-                        <option value="Insertion">Insertion Sort</option>
-                        <option value="Selection">Selection Sort</option>
-                        <option value="Merge">Merge Sort</option>
-                        <option value="Quick">Quick Sort</option>
-                        <option value="Heap">Heap Sort</option>
-                    </select>
+                <div class="col controlPanel">
+                    <div class="float-child" style="text-align:left">
+                        <div id="bubbleKey" style="padding-top:20px; display:block">
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Index: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #2163a3;height:25px;width:25px;border:1px solid white"></div>
 
-                    <button id="Play" class="btn">Play</button>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Swap Element: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #379683;height:25px;width:25px;border:1px solid white"></div>
+                        </div>
+                        <div id="insertionKey" style="padding-top:20px; display:none">
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Index: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #2163a3;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shifted Element: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #26675a;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Swap Elements: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #379683;height:25px;width:25px;border:1px solid white"></div>
+                        </div>
+                        <div id="selectionKey" style="padding-top:20px; display:none">
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Index: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #2163a3;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Minimum: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #EDF5E1;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Swap Elements: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #379683;height:25px;width:25px;border:1px solid white"></div>
+                        </div>
+                        <div id="mergeKey" style="padding-top:20px; display:none">
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Index: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #2163a3;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Swap Elements: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #379683;height:25px;width:25px;border:1px solid white"></div>
+                        </div>
+                        <div id="quickKey" style="padding-top:20px; display:none">
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Index: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #2163a3;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current Pivot: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #EDF5E1;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Swap Elements: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #379683;height:25px;width:25px;border:1px solid white"></div>
+                        </div>
+                        <div id="heapKey" style="padding-top:20px; display:none">
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build Max Heap: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #EDF5E1;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finished Heap: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #d7e2c9;height:25px;width:25px;border:1px solid white"></div>
+                            <div style="float:left;"><h3 style="margin-top: 0;margin-bottom: 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Swap Elements: &nbsp;</h3></div>
+                            <div style="float:left;background-color: #379683;height:25px;width:25px;border:1px solid white"></div>
+                        </div>
+                    </div>
+                    <div class="float-child"  style= "text-align: right; padding: 1% 0 1% 0px">
+                        <button id="Shuffle" class="btn">Random</button>
+                        <button id="Reverse" class="btn">Reverse</button>
+                        <button id="Sorted" class="btn">Sorted</button>
+                        <select id="AlgorithmSelect" class="custom-select">
+                            <option value="Bubble">Bubble Sort</option>
+                            <option value="Insertion">Insertion Sort</option>
+                            <option value="Selection">Selection Sort</option>
+                            <option value="Merge">Merge Sort</option>
+                            <option value="Quick">Quick Sort</option>
+                            <option value="Heap">Heap Sort</option>
+                        </select>
 
+                        <button id="Play" class="btn">Play</button>
+                    </div>
                 </div>
             </div>
         </div>
