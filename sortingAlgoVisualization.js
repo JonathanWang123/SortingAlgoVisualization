@@ -16,13 +16,13 @@ for(var i = 0; i < 20; i++){
             selectionSort(a);   
             break;          
           case "Merge":
-            mergeSort(a,0,a.length-1); 
+            mergeSort(a,20); 
             break;          
           case "Quick":
             quickSort(a,0,a.length-1);
             break;
           case "Heap":
-            heapSort(a);
+            heapSort(a,20);
             break;
           default:
             break;
@@ -241,143 +241,282 @@ async function selectionSort(array){
             iBar.style.backgroundColor = "black";
             bar.style.backgroundColor = "black";
         } 
-        document.getElementById("b" + (array.length)).backgroundColor = "black";
+        document.getElementById("b" + (array.length)).style.backgroundColor = "black";
         enableButtons();
 }
-function mergeSort(array,l,r) 
+
+async function mergeSort(array, n)  
 {
     disableButtons();
-        if (l < r) { 
-            // Find the middle point 
-            var m = Math.floor((l + r) / 2); 
-  
-            // Sort first and second halves 
-            mergeSort(array, l, m); 
-            mergeSort(array, m + 1, r); 
-  
-            // Merge the sorted halves 
-            merge(array, l, m, r); 
-        } 
+      var curr_size;
+      var left_start;
+      for (curr_size = 1; curr_size <= n-1; curr_size = 2*curr_size) 
+      { 
+          for (left_start = 0; left_start < n-1;left_start += 2*curr_size) 
+          { 
+              
+              var mid = Math.min(left_start + curr_size - 1, n-1); 
+              var right_end = Math.min(left_start + 2*curr_size - 1, n-1); 
+              var borderLeft = document.getElementById("l" + (left_start));
+              borderLeft.style.backgroundColor="rgba(176, 176, 176, 1)";
+              var borderRight = document.getElementById("l" + (right_end+1)); 
+              borderRight.style.backgroundColor="rgba(176, 176, 176, 1)";
+              for(var x = left_start; x <= right_end; x++){
+                var barTemp = document.getElementById("b" + (x+1)); 
+                barTemp.style.backgroundColor = "#7e7e7e";
+              }
+              
+              var n1 = mid - left_start + 1; 
+              var n2 = right_end - mid; 
+              var L = [];
+              var L_Index = [];
+              var R = [];
+              var R_Index = [];
+              
+                for (var i = 0; i < n1; i++) {
+                    L[i] = array[left_start + i];
+                    L_Index[i] = left_start + i;
+                }
+                for (var j = 0; j < n2; j++) {
+                    R[j] = array[mid + 1 + j]; 
+                    R_Index[j] = mid + 1 + j;
+                }
+                i = 0, j = 0; 
+                var k = left_start; 
+                while (i < n1 && j < n2) { 
+                    if (L[i] <= R[j]) { 
+                        array[k] = L[i]; 
+                        var barTemp = document.getElementById("b" + (L_Index[i]+1));
+                        for(var iterator = L_Index[i]; iterator > k; iterator--){
+                            var barTemp = document.getElementById("b" + (iterator+1));
+                            var barPrev = document.getElementById("b" + (iterator));
+                            barTemp.style.backgroundColor = "red";
+                            barPrev.style.backgroundColor = "red";
+                            swap("b" + (iterator+1), "b" + (iterator), 10,15);
+                            await delay(300);
+                            barTemp.style.backgroundColor = "#7e7e7e";
+                            barPrev.style.backgroundColor = "#7e7e7e";
+                        }
+                        i++; 
+                    } 
+                    else { 
+                        array[k] = R[j]; 
+                        var barTemp = document.getElementById("b" + (R_Index[j]+1));
+                        for(var iterator = R_Index[j]; iterator > k; iterator--){
+                            var barTemp = document.getElementById("b" + (iterator+1));
+                            var barPrev = document.getElementById("b" + (iterator));
+                            barTemp.style.backgroundColor = "red";
+                            barPrev.style.backgroundColor = "red";
+                            swap("b" + (iterator+1), "b" + (iterator), 10,15);
+                            await delay(300);
+                            barTemp.style.backgroundColor = "#7e7e7e";
+                            barPrev.style.backgroundColor = "#7e7e7e";
+                        }
+                        j++;
+                    } 
+                    k++; 
+                }
+                while (i < n1) { 
+                    array[k] = L[i]; 
+                    var barTemp = document.getElementById("b" + (L_Index[i]+1));
+                    for(var iterator = L_Index[i]; iterator > k; iterator--){
+                        var barTemp = document.getElementById("b" + (iterator+1));
+                        var barPrev = document.getElementById("b" + (iterator));
+                            barTemp.style.backgroundColor = "red";
+                            barPrev.style.backgroundColor = "red";
+                        swap("b" + (iterator+1), "b" + (iterator), 10,15);    
+                        await delay(300);
+                            barTemp.style.backgroundColor = "#7e7e7e";
+                            barPrev.style.backgroundColor = "#7e7e7e";
+                    }
+                    i++; 
+                    k++; 
+                } 
+
+                while (j < n2) { 
+                    array[k] = R[j]; 
+                    var barTemp = document.getElementById("b" + (R_Index[j]+1));
+                    for(var iterator = R_Index[j]; iterator > k; iterator--){
+                        var barTemp = document.getElementById("b" + (iterator+1));
+                        var barPrev = document.getElementById("b" + (iterator));
+                            barTemp.style.backgroundColor = "red";
+                            barPrev.style.backgroundColor = "red";
+                        swap("b" + (iterator+1), "b" + (iterator), 10,15);
+                        await delay(300);
+                            barTemp.style.backgroundColor = "#7e7e7e";
+                            barPrev.style.backgroundColor = "#7e7e7e";
+                       }
+                    j++; 
+                    k++; 
+                }
+              await delay(300);
+              borderLeft = document.getElementById("l" + (left_start));
+              borderLeft.style.backgroundColor="rgba(176, 176, 176, 0)";
+              borderRight = document.getElementById("l" + (right_end+1)); 
+              borderRight.style.backgroundColor="rgba(176, 176, 176, 0)";
+              for(var x = left_start; x <= right_end; x++){
+                var barTemp = document.getElementById("b" + (x+1)); 
+                barTemp.style.backgroundColor = "black";
+              }
+          } 
+      }
     enableButtons();
 }
-function merge(array,l,m,r){
-        var n1 = m - l + 1; 
-        var n2 = r - m; 
-
-        var L = [];
-        var R = [];
-
-        for (var i = 0; i < n1; i++) {
-            L[i] = array[l + i]; 
-        }
-        for (var j = 0; j < n2; j++) {
-            R[j] = array[m + 1 + j]; 
-        }
-
-        i = 0, j = 0; 
-
-        var k = l; 
-        while (i < n1 && j < n2) { 
-            if (L[i] <= R[j]) { 
-                array[k] = L[i]; 
-                i++; 
-            } 
-            else { 
-                array[k] = R[j]; 
-                j++; 
-            } 
-            k++; 
-        } 
-
-        while (i < n1) { 
-            array[k] = L[i]; 
-            i++; 
-            k++; 
-        } 
-
-        while (j < n2) { 
-            array[k] = R[j]; 
-            j++; 
-            k++; 
-        } 
-}
-function quickSort(array,low,high){
+async function quickSort(array,l,h){
     disableButtons();
-       if (low < high) 
-        { 
-            var pi = partition(array, low, high); 
+    var stack = [];
+    var top = -1;
+    stack[++top] = l; 
+    stack[++top] = h; 
+        while (top >= 0) { 
+            h = stack[top--]; 
+            l = stack[top--]; 
   
-            quickSort(array, low, pi-1); 
-            quickSort(array, pi+1, high); 
-        } 
-    enableButtons();
-}
-function partition(array,low,high){
-        var pivot = array[high];  
-        var i = (low-1); // index of smaller element 
-        for (var j=low; j<high; j++) 
-        { 
-            // If current element is smaller than the pivot 
-            if (array[j] < pivot) 
-            { 
-                i++; 
-  
-                // swap arr[i] and arr[j] 
-                var temp1 = array[i]; 
-                array[i] = array[j]; 
-                array[j] = temp1; 
+            // Set pivot element at its correct position 
+            // in sorted array 
+            var pivot = array[h];
+            var pivotBar = document.getElementById("b" + (h+1));
+            pivotBar.style.backgroundColor = "cyan";
+            await delay(150);
+            var i = (l-1);
+            for (var j = l; j < h; j++) 
+            {   
+                var bar1 = document.getElementById("b" + (j+1));
+                var bar2 = document.getElementById("b" + (j+1));
+                bar2.style.backgroundColor="grey";
+                await delay(100);
+                if (array[j] < pivot) 
+                { 
+                    i++; 
+                    if(i>=0){
+                        bar1 = document.getElementById("b" + (i+1));
+                        bar1.style.backgroundColor="grey";
+                    }
+                    await delay(100);
+                    var temp1 = array[i]; 
+                    array[i] = array[j]; 
+                    array[j] = temp1; 
+                    var tempBar1 = document.getElementById("b" + (i+1));
+                    var tempBar2 = document.getElementById("b" + (j+1));
+                    swap("b" + (i+1),"b" + (j+1),5,30);
+                    tempBar1.style.backgroundColor="red";
+                    tempBar2.style.backgroundColor="red";
+                    await delay(window.innerWidth/3);
+                    tempBar1.style.backgroundColor="grey";
+                    tempBar2.style.backgroundColor="grey";
+                } 
+                bar1.style.backgroundColor="black";
+                bar2.style.backgroundColor="black";
             } 
-        } 
+            var temp2 = array[i+1]; 
+            array[i+1] = array[h]; 
+            array[h] = temp2; 
+            var bar1 = document.getElementById("b" + (i+2));
+            var bar2 = document.getElementById("b" + (h+1));
+            swap("b" + (i+2),"b" + (h+1),5,30);
+            await delay(200);
+            var p = i+1;
   
-        // swap arr[i+1] and arr[high] (or pivot) 
-        var temp2 = array[i+1]; 
-        array[i+1] = array[high]; 
-        array[high] = temp2; 
+            if (p - 1 > l) { 
+                stack[++top] = l; 
+                stack[++top] = p - 1; 
+            } 
   
-        return i+1; 
-}
-function heapSort(array){
-    disableButtons();
-        var n = array.length; 
-  
-        // Build heap (rearrange array) 
-        for (var i = n / 2 - 1; i >= 0; i--) 
-            heapify(array, n, i); 
-  
-        // One by one extract an element from heap 
-        for (i=n-1; i>0; i--) 
-        { 
-            // Move current root to end 
-            var temp = array[0]; 
-            array[0] = array[i]; 
-            array[i] = temp; 
-  
-            // call max heapify on the reduced heap 
-            heapify(array, i, 0); 
+            // If there are elements on right side of pivot, 
+            // then push right side to stack 
+            if (p + 1 < h) { 
+                stack[++top] = p + 1; 
+                stack[++top] = h; 
+            } 
+            await delay(100);
+            pivotBar.style.backgroundColor = "black";
         } 
     enableButtons();
 }
-function heapify(array,n,i){
-        var largest = i; // Initialize largest as root 
-        var l = 2*i + 1; // left = 2*i + 1 
-        var r = 2*i + 2; // right = 2*i + 2 
-  
-        // If left child is larger than root 
-        if (l < n && array[l] > array[largest]) 
-            largest = l; 
-  
-        // If right child is larger than largest so far 
-        if (r < n && array[r] > array[largest]) 
-            largest = r; 
-  
-        // If largest is not root 
-        if (largest != i) 
+async function heapSort(array, n){
+    disableButtons();
+        for (var i = 1; i < n; i++) 
         { 
-            var swap = array[i]; 
-            array[i] = array[largest]; 
-            array[largest] = swap; 
-  
-            // Recursively heapify the affected sub-tree 
-            heapify(array, n, largest); 
+          if (array[i] > array[Math.floor((i - 1) / 2)]) 
+          { 
+            var j = i; 
+
+            while (array[j] > array[Math.floor((j - 1) / 2)]) 
+            {
+              var temp = array[j]; 
+              array[j]=array[Math.floor((j - 1) / 2)]; 
+              array[Math.floor((j - 1) / 2)] = temp;
+              var varBar1 = document.getElementById("b" + (j+1));
+              var varBar2 = document.getElementById("b" + (Math.floor((j - 1) / 2)+1));
+              varBar1.style.backgroundColor = "red";
+              varBar2.style.backgroundColor = "red";
+              swap("b" + (j+1), "b" + (Math.floor((j - 1) / 2)+1), 5, 40);
+              j = Math.floor((j - 1) / 2); 
+              await delay(window.innerWidth/3.5);
+              varBar1.style.backgroundColor = "cyan";
+              varBar2.style.backgroundColor = "cyan";
+            } 
+          } 
+        }
+        for(var x = 0; x <20; x++){
+          var barTemp = document.getElementById("b" + (x+1)); 
+          barTemp.style.backgroundColor = "#00e0e0";
+          await delay(25);
+        }
+        await delay(300);
+        for(var x = 0; x <20; x++){
+          var barTemp = document.getElementById("b" + (x+1)); 
+          barTemp.style.backgroundColor = "black";
+        }
+        for (i = n - 1; i > 0; i--) 
+        { 
+          var temp = array[0]; 
+          array[0]=array[i]; 
+          array[i] = temp;
+          var varBar1 = document.getElementById("b" + (1));
+          var varBar2 = document.getElementById("b" + (i+1));
+          varBar1.style.backgroundColor = "red";
+          varBar2.style.backgroundColor = "red";
+          swap("b" + (1), "b" + (i+1), 5, 30);
+          await delay(window.innerWidth/2);
+          varBar1.style.backgroundColor = "black";
+          varBar2.style.backgroundColor = "black";
+            
+          var j = 0, index; 
+
+          do
+          { 
+            index = (2 * j + 1); 
+
+            if (index < (i - 1) && array[index] < array[index + 1]) {
+              index++; 
+            }
+            if (index < i && array[j] < array[index]){
+              var temp = array[j]; 
+              array[j]=array[index]; 
+              array[index] = temp; 
+              var tempBar1 = document.getElementById("b" + (j+1));
+              var tempBar2 = document.getElementById("b" + (index+1));
+              tempBar1.style.backgroundColor = "red";
+              tempBar2.style.backgroundColor = "red";
+              swap("b" + (j+1), "b" + (index+1), 10, 40);
+              await delay(window.innerWidth/3.5);
+              tempBar1.style.backgroundColor = "cyan";
+              tempBar2.style.backgroundColor = "cyan";
+            }
+            j = index; 
+
+          } while (index < i); 
+            for(var x = 0; x < i; x++){
+              var barTemp = document.getElementById("b" + (x+1)); 
+              barTemp.style.backgroundColor = "#00e0e0";
+              await delay(25);
+            }
+            await delay(300);
+            for(var x = 0; x <20; x++){
+              var barTemp = document.getElementById("b" + (x+1)); 
+              barTemp.style.backgroundColor = "black";
+            }
         } 
+    enableButtons();
 }

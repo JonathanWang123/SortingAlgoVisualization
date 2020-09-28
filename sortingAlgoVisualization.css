@@ -120,8 +120,8 @@ body {
 .arrayElement{
     position:relative;
     width: 100%;
-    padding-left:0.5%;
-    padding-right:0.5%;
+    padding-left:0.4%;
+    padding-right:0.4%;
     max-width: 4%;
     height:3.5vh;
     top:66.5vh;
@@ -133,7 +133,16 @@ body {
     height:100%;
     transform-origin: bottom center;
 }
-
+.line{
+    position:relative;
+    background-color:rgba(176, 176, 176, 0);
+    width: 100%;
+    max-width: 0.19245%;
+    top:66.5vh;
+    height: 3.5vh;
+    transform-origin: bottom center;
+    transform: scale(1,20);
+}
 .controlPanel{
     border-radius: 1px 1px 20px 20px;
     border: 2px solid black;
