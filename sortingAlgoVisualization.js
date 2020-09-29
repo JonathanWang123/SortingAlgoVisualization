@@ -78,9 +78,6 @@ for(var i = 0; i < 20; i++){
             case "3":
                 speed = 3;
                 break;
-            case "100":
-                speed = 100;
-                break;
             default:
                 speed = 1;
                 break;
